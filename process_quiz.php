@@ -152,14 +152,14 @@ include '_includes/_head.php'
                     
                     $qid = $Quiz->create($myquiz);
                     if ($qid === false || $qid == 0) {
-                        die("ERROR: a database error has occured; contact allMedRx");
+                        die("ERROR: a database error has occured;");
                     }
 
                     /*  Create Results Page */
                     echo "<h3>Faculty Certification Quiz Results</h3><br />";
                     echo "<div><center>";
                     echo "<table class='table noborder'><tr>";
-                    echo "<td style='width: 100px'><strong>Practice:</strong></td><td>" . strtoupper($practice) . "</td>";
+                    echo "<td style='width: 100px'><strong>Learning Center:</strong></td><td>" . strtoupper($practice) . "</td>";
                     echo "<td tyle='width: 100px'><strong>Location:</strong></td><td>" . $location . "</td></tr>";
                     echo "<tr><td style='width: 100px'><strong>Name:</strong></td><td>" . $techname . "</td>";
                     echo "<td><strong>Quiz Number:</strong></td><td>" . $qid . "</td></tr>";
@@ -194,7 +194,7 @@ include '_includes/_head.php'
                         <style type="text/css">
                             @font-face {
                                 font-family: "diploma-regular";
-                                src: url(https://www.allergyassistprogram.com/fonts/diploma-regular.ttf) format("truetype");
+                                src: url(http://localhost/fonts/diploma-regular.ttf) format("truetype");
                             }
                         </style>
                         <?php
@@ -209,11 +209,11 @@ include '_includes/_head.php'
                             <style type="text/css">
                             @font-face {
                                font-family: "diploma-regular";
-                               src: url(https://allergyassistprogram.com/fonts/diploma-regular.ttf) format("truetype");
+                               src: url(http://localhost/fonts/diploma-regular.ttf) format("truetype");
                             }
                            </style>
                            <page orientation="landscape" format="370x200" > 
-                           <img style="width: 1300px; height: 300px" src="_modules/cert/header.jpg" />'
+                           <img style="width: 1300px; height: 300px" src="images/cert/header.jpg" />'
                                 . '<table style="width: 100%; padding-top:-10px;">
                            <tr>
                            <td style="text-align: center;width=33%;">&nbsp;</td>
@@ -223,10 +223,9 @@ include '_includes/_head.php'
                            <td style="text-align: center;width=33%;">&nbsp;</td>
                            </tr>
                            </table>
-                           <img style="width: 1300px; height: 300px" src="_modules/cert/footer.jpg" />
+                           <img style="width: 1300px; height: 300px" src="images/cert/footer.jpg" />
                            </page>';
                         
-                        //require __DIR__ . '/libraries/html2pdf-4.5.1/vendor/autoload.php';
                         $myfontfile = __DIR__ . '/vendor/tecnickcom/tcpdf/fonts/diploma-regular.php';
                          
                         $filename = __DIR__ . '/certificates/cert_' . $qid . '.pdf';
@@ -241,22 +240,15 @@ include '_includes/_head.php'
                         echo '<a target="_blank" href="download_cert.php?id=' . $qid . '&type=Quiz"><h3 style="white-space: nowrap">Download Certificate</h3></a>';
                         echo '</td></tr>';
                         echo '</table>';
-                        //echo "<br><br><hr>";
-                        //echo "<div>";
-                        echo '<img src="_modules/cert/header.jpg" />';
-                        //echo "<div class='clearfix'>&nbsp;</div>";
+                        echo '<img src="images/cert/header.jpg" />';
                         echo "<div><center><span style='color: #000; font-family: diploma-regular; font-size: {$font_size}'>{$techname}</span></center></div>";
-                        //echo "<div class='clearfix'>&nbsp;</div>";
-                        echo '<img src="_modules/cert/footer.jpg" />';
-                        //echo "</div>";
-                        //echo "</td></tr></table>";
+                        echo '<img src="images/cert/footer.jpg" />';
                     } else {
                         echo "<br /><h3 align='center'> <a href='dashboard.php'>Return to Dashboard</a></h3>";
                     }
                     ?>
                 </div>
                </section>
-             <!--/div-->
         </div>
     </div>
     <?php
