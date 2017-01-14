@@ -1,6 +1,5 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+
 require_once "vendor/autoload.php";
 
 spl_autoload_register(function ($class_name) {
@@ -66,7 +65,7 @@ $user_rememberme = filter_input(INPUT_POST, 'rememberme');
 
 $user_rememberme = ($user_rememberme == 'yes') ? 1 : 0;
 
-
+// This user table used for root admin password management - no forgot password implementation allowed
 $query = $dbh->prepare("SELECT * FROM `user` WHERE email = ? AND password = ? ");
 $query->execute(array($user_email, $user_password));
 if (!$row = $query->fetch(\PDO::FETCH_ASSOC)) {
@@ -77,14 +76,6 @@ if (!$row = $query->fetch(\PDO::FETCH_ASSOC)) {
 
 $config = new PHPAuth\Config($dbh);
 $auth = new PHPAuth\Auth($dbh, $config);
-
-/////////////////// creates new user
-//$null_int = 0;
-//$status = $auth->addUser('plazolas@yahoo.com', 'W2e3r4T5@',[], $null_int);
-//if($status['error'] ===  true){
-//    echo "Unable to insert user".$status['message'];exit;
-//}
-//////////////////////
 
 $login = $auth->login($user_email, $user_password, $user_rememberme);
 
@@ -99,19 +90,9 @@ if ($login['error']) {
     $result = setcookie($config->cookie_name, $login['hash'], $login['expire'], $config->cookie_path, $config->cookie_domain, $config->cookie_secure, $config->cookie_http);
     if ($result == false) {
         echo "<h1>COULD NOT SET COOKIE!! You must enable cookies on your browser for this site!</h1>";
-        //echo "setcookie(" . $config->cookie_name . "," . $login['hash'] . "," . $login['expire'] . "," . $config->cookie_path . "," . $config->cookie_domain . "," . $config->cookie_secure . "," . $config->cookie_http . ")";
         exit;
     }
     session_start();
-
-    /*
-      print_r($login);
-      echo "<hr>";
-      echo $config->cookie_name;
-      echo "<hr>";
-      print_r($config);
-      exit;
-     * */
 
     $uid = $auth->getUID($user_email);
     $user_obj = new User();
