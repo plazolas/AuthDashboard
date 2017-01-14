@@ -1,0 +1,34 @@
+{
+    "name": "allmedlive",
+    "type": "project",
+    "description": "allmedrx allergy test application",
+    "keywords": ["allergytest", "allmedrx"],
+    "homepage": "https://www.allergyassistprogram.com",
+    "license": "LGPL",
+    "authors": [
+        {
+            "name": "Oswald Plazola",
+            "homepage": "https://github.com/plazolas",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.2",
+        "tecnickcom/tcpdf": "~6.2.0",
+        "phpauth/phpauth" : ">1.0",
+        "phpmailer/phpmailer": "~5.2",
+        "spipu/html2pdf":"4.5.1",
+        "league/oauth2-google":">1.0"
+    },
+    "suggest": {
+        "fagundes/zff-html2pdf": "zff-html2pdf module ~0.1.1, if you need to integrate HTML2PDF with Zend Framework 2 (zf2)",
+        "ext-gd": "Allows to embed images into the PDF"
+    },
+    "autoload": {
+        "files": [
+        ]
+    },
+    "require-dev": {
+         "phpunit/phpunit" : "3.7.*"
+    }
+}
