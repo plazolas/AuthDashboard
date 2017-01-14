@@ -1,7 +1,4 @@
 <?php 
-// set PHP session folder
-session_save_path(__DIR__.'/sessions');
-
 // changes PHP default session cookie name
 if (ini_set('session.name', '_uall') === false) {
     session_name('_uall');
@@ -76,7 +73,7 @@ session_start();
                 <div class="container text-center header-part">
                     <div style="color: #fff; font-size: 55px; text-transform: uppercase;">Secured Dashboard <span style="color: #f9ab8b">Made Simple.</span></div>
                     <div class="angle-down">
-                        <a href="#Practice_Area">
+                        <a href="login.php">
                             <i class="fa fa-angle-double-down fa-4x wow animated fadeInDown" data-wow-iteration="infinite" ></i>
                         </a>
                     </div>

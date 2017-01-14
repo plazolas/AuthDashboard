@@ -7,9 +7,6 @@ spl_autoload_register(function ($class_name) {
         include "Model/" . $class_name . '.php';
 });
 
-// set session folder
-session_save_path(__DIR__.'/sessions');
-
 // changes PHP default session cookie name
 if (ini_set('session.name', '_uall') === false) {
     session_name('_uall');

@@ -5,7 +5,6 @@ spl_autoload_register(function ($class_name) {
         include "Model/" . $class_name . '.php';
 });
 
-session_save_path(__DIR__.'/sessions');
 if(ini_set('session.name', '_uall') === false)
 {
     session_name('_uall');
