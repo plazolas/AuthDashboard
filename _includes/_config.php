@@ -64,8 +64,8 @@ $dbh = new PDO("mysql:host={$config->server};dbname={$config->database}", $confi
 if ($dbh === false) {
     die("unable to connect to database");
 }
-$PHPAuthconfig = new PHPAuth\Config($dbh);
-$auth = new PHPAuth\Auth($dbh, $PHPAuthconfig);
+$PHPAuthConfig = new PHPAuth\Config($dbh);
+$auth = new PHPAuth\Auth($dbh, $PHPAuthConfig);
 
 $result = $auth->isLogged();
 if ($result === false) {
@@ -82,7 +82,7 @@ if ($result === false) {
     exit();
 }
 
-if (isset($_COOKIE[$PHPAuthconfig->cookie_name]) && !$auth->checkSession($_COOKIE[$PHPAuthconfig->cookie_name])) {
+if (isset($_COOKIE[$PHPAuthConfig->cookie_name]) && !$auth->checkSession($_COOKIE[$PHPAuthConfig->cookie_name])) {
     //header('HTTP/1.0 403 Forbidden');
     //echo __FILE__." Cookies not found: ";exit;
     header('Location: logout.php');
