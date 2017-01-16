@@ -30,9 +30,6 @@ function local_app_error($errno, $errstr, $errfile, $errline) {
     return true;
 }
 
-// set session folder
-session_save_path(__DIR__.'/../sessions');
-
 // changes PHP default session cookie name
 if (ini_set('session.name', '_uall') === false) {
     session_name('_uall');
@@ -62,13 +59,13 @@ if (isset($_SESSION['newuser']) && !preg_match('/user_reg/', $script_name)) {
     unset($_SESSION['newuser']);
 }
 
-$myconfig = new Config();
-$dbh = new PDO("mysql:host={$myconfig->server};dbname={$myconfig->database}", $myconfig->user, $myconfig->password);
+$config = new Config();
+$dbh = new PDO("mysql:host={$config->server};dbname={$config->database}", $config->user, $config->password);
 if ($dbh === false) {
     die("unable to connect to database");
 }
-$config = new PHPAuth\Config($dbh);
-$auth = new PHPAuth\Auth($dbh, $config);
+$PHPAuthconfig = new PHPAuth\Config($dbh);
+$auth = new PHPAuth\Auth($dbh, $PHPAuthconfig);
 
 $result = $auth->isLogged();
 if ($result === false) {
@@ -85,7 +82,7 @@ if ($result === false) {
     exit();
 }
 
-if (isset($_COOKIE[$config->cookie_name]) && !$auth->checkSession($_COOKIE[$config->cookie_name])) {
+if (isset($_COOKIE[$PHPAuthconfig->cookie_name]) && !$auth->checkSession($_COOKIE[$PHPAuthconfig->cookie_name])) {
     //header('HTTP/1.0 403 Forbidden');
     //echo __FILE__." Cookies not found: ";exit;
     header('Location: logout.php');
