@@ -64,7 +64,6 @@ if ($parent_id == '') {
 }
 
 // INSERT practice
-
 $Practice = new Practice();
 $insert_obj = new stdClass();
 $id = 0;
@@ -84,7 +83,7 @@ if ($update_id != '') {
     //print_r($insert_obj);exit;
     $practice_id = $Practice->create($insert_obj);
     if ($practice_id === false) {
-        trigger_error(__FILE__ . 'Unable to insert into db ', E_USER_ERROR);
+        error_log(__FILE__ . 'Unable to insert into db ', E_USER_ERROR);
         return false;
     }
 }
@@ -107,17 +106,15 @@ for ($i = 1; $i < 5; $i++) {
         $drlicensenum = $$var_licensenum;
         $drnpi = $$var_npi;
 
-        // INSERT practice
         $insert_obj = new stdClass();
         $id = 0;
         foreach ($Drinfo->fields as $field) {
             $insert_obj->$field = (isset($$field)) ? $$field : '';
         }
         $insert_obj->dt = date('Y-m-d H:i:s');
-        //print_r($insert_obj);exit;
         $drinfo_id = $Drinfo->create($insert_obj);
         if ($drinfo_id === false) {
-            trigger_error(__FILE__ . 'Unable to insert into db ', E_USER_ERROR);
+            error_log(__FILE__ . 'Unable to insert into db ');
             return false;
         }
         unset($id);
@@ -154,19 +151,24 @@ $html .= "<br /><br />";
 $html .= "</body>";
 $html .= "</html>";
 
-//TODO: get smtp server, username and password from AuthPHP Table!!!
+$config = new Config();
+$dbh = new PDO("mysql:host={$config->server};dbname={$config->database}", $config->user, $config->password);
+if ($dbh === false) {
+    die("unable to connect to database");
+}
+$PHPAuthConfig = new PHPAuth\Config($dbh);
 
 $phpemail = new PHPMailer();
 
 if (preg_match('/localhost/', $_SERVER['HTTP_HOST'])) {
   $phpemail->IsSMTP(); // Use SMTP
-  $phpemail->Host        = "smtp.gmail.com"; // Sets SMTP server
+  $phpemail->Host        = $PHPAuthConfig->smtp_host; // Sets SMTP server
   $phpemail->SMTPDebug   = 2; // 2 to enable SMTP debug information
   $phpemail->SMTPAuth    = TRUE; // enable SMTP authentication
   $phpemail->SMTPSecure  = "tls"; //Secure conection
   $phpemail->Port        = 587; // set the SMTP port
-  $phpemail->Username    = 'dashboard@gmail.com'; // SMTP account username
-  $phpemail->Password    = 'example123'; // SMTP account password
+  $phpemail->Username    = $PHPAuthConfig->smtp_username; // SMTP account username
+  $phpemail->Password    = $PHPAuthConfig->smtp_password; // SMTP account password
   $phpemail->Priority    = 1; // Highest priority - Email priority (1 = High, 3 = Normal, 5 = low)
   $phpemail->CharSet     = 'UTF-8';
 }
