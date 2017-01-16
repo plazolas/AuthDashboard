@@ -9,6 +9,7 @@ FEATURES
 * Integrated PHPMailer for admin notifications.
 * Integrarted HTML2PHP for PDF document downloads feature.
 * Session and Cookie Secured AJAX calls.
+* Only admin user can create and manage other users and their passwords.
 * Composer dependency friendly. 
 
 DEMO INCLUDES
