@@ -8,7 +8,7 @@ FEATURES
 * Integrated PHPAuth with local user tables for admin password management.
 * Integrated PHPMailer for admin notifications.
 * Integrarted HTML2PHP for PDF document downloads feature.
-* Session and Cookie Secured AJAX calls.
+* JQuery AJAX calls with added PHP Sessions and Cookies security check.
 * Only admin user can create and manage other users and their passwords.
 * Composer dependency friendly. 
 
