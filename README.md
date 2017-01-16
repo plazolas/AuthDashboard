@@ -18,14 +18,16 @@ DEMO INCLUDES
 * Certification / Diplomas Manager.
 * Take a quiz for certification with automatic result chekings.
 
+ADDITIONAL INSTALATION NOTES
 
-certificates folder must be read write
+The certificates folder must be read write
 
 Create dbConfig.php file outside public directory i.e:
+<pre>
 {
 "server"    : "localhost",
 "user"      : "root",
 "password"  : "abc123",
 "database"  : "dashboard"
 }
-
+</pre>
