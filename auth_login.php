@@ -13,13 +13,13 @@ if (ini_set('session.name', '_uall') === false) {
 
 session_start();
 
-$myconfig = new Config();
-$dbh = new PDO("mysql:host={$myconfig->server};dbname={$myconfig->database}", $myconfig->user, $myconfig->password);
+$config = new Config();
+$dbh = new PDO("mysql:host={$config->server};dbname={$config->database}", $config->user, $myconfig->password);
 if ($dbh === false) {
     die("Unable to connect to database");
 }
 
-if($myconfig->server == 'localhost') {
+if($config->server == 'localhost') {
     $env = 'dev';
 } else {
     $env = 'live';    
@@ -65,7 +65,8 @@ $user_rememberme = filter_input(INPUT_POST, 'rememberme');
 
 $user_rememberme = ($user_rememberme == 'yes') ? 1 : 0;
 
-// This user table used for root admin password management - no forgot password implementation allowed
+// This user table used for root admin password management - no forgot password on this dashboard
+// Password are solely managed by admin users
 $query = $dbh->prepare("SELECT * FROM `user` WHERE email = ? AND password = ? ");
 $query->execute(array($user_email, $user_password));
 if (!$row = $query->fetch(\PDO::FETCH_ASSOC)) {
@@ -74,8 +75,8 @@ if (!$row = $query->fetch(\PDO::FETCH_ASSOC)) {
     exit();
 }
 
-$config = new PHPAuth\Config($dbh);
-$auth = new PHPAuth\Auth($dbh, $config);
+$PHPAuthConfig = new PHPAuth\Config($dbh);
+$auth = new PHPAuth\Auth($dbh, $PHPAuthConfig);
 
 $login = $auth->login($user_email, $user_password, $user_rememberme);
 
