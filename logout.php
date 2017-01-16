@@ -30,14 +30,14 @@ if ($env == 'dev') {
     $stealth_error_handler = set_error_handler('local_app_error', E_ALL & ~E_NOTICE & ~E_USER_NOTICE);
 }
 
-$myconfig = new Config();
-$dbh = new PDO("mysql:host={$myconfig->server};dbname={$myconfig->database}", $myconfig->user, $myconfig->password);
+$config = new Config();
+$dbh = new PDO("mysql:host={$config->server};dbname={$config->database}", $config->user, $config->password);
 if ($dbh === false) {
     die("Unable to connect to database");
 }
 
-$config = new PHPAuth\Config($dbh);
-$auth   = new PHPAuth\Auth($dbh, $config);
+$PHPAuthConfig = new PHPAuth\Config($dbh);
+$auth   = new PHPAuth\Auth($dbh, $PHPAuthConfig);
 
 
 $auth->logout($config->cookie_name);
