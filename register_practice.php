@@ -154,7 +154,7 @@ $html .= "<br /><br />";
 $html .= "</body>";
 $html .= "</html>";
 
-include("libraries/PHPMailer/class.phpmailer.php");
+//TODO: get smtp server, username and password from AuthPHP Table!!!
 
 $phpemail = new PHPMailer();
 
@@ -165,8 +165,8 @@ if (preg_match('/localhost/', $_SERVER['HTTP_HOST'])) {
   $phpemail->SMTPAuth    = TRUE; // enable SMTP authentication
   $phpemail->SMTPSecure  = "tls"; //Secure conection
   $phpemail->Port        = 587; // set the SMTP port
-  $phpemail->Username    = 'plazolas@gmail.com'; // SMTP account username
-  $phpemail->Password    = 'y6u7i8o9'; // SMTP account password
+  $phpemail->Username    = 'dashboard@gmail.com'; // SMTP account username
+  $phpemail->Password    = 'example123'; // SMTP account password
   $phpemail->Priority    = 1; // Highest priority - Email priority (1 = High, 3 = Normal, 5 = low)
   $phpemail->CharSet     = 'UTF-8';
 }
