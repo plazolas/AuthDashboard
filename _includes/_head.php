@@ -1,8 +1,8 @@
 <head>
 	<meta charset="utf-8">
-	<title>Simple Responsive LAMP Dashboard with AuthPHP</title>
-	<meta name="description" content="Simple Responsive LAMP Dashboard with AuthPHP">
-        <meta name="keywords" content="Simple Responsive LAMP Dashboard with AuthPHP package" />
+	<title>plazolas/AuthDashboard</title>
+	<meta name="description" content="AuthDashboard - Secured Responsive LAMP">
+        <meta name="keywords" content="AuthDashboard, plazolas/AuthDashboard, Responsive Dashboard, Oswald Plazola, plazolas" />
         <meta name="author" content="Oswald Plazola">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1">
