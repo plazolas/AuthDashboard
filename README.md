@@ -10,6 +10,7 @@ FEATURES
 * Integrarted HTML2PHP for PDF document downloads feature.
 * JQuery AJAX calls with added PHP Sessions and Cookies security check.
 * Only admin user can create and manage other users and their passwords.
+* Terms and Coditions Sample text. Must Agree to login functionality.
 * Composer dependency friendly. 
 
 DEMO INCLUDES
