@@ -20,6 +20,7 @@ if($practice_arr == false) {
     exit();
 }
 
+unset($_SESSION['config']);
 $_SESSION['config']['practice'] = $practice_arr;
 
 if (count($practice_arr) > 0) {
@@ -47,20 +48,20 @@ if (count($practice_arr) > 0) {
                         <?php
                         //ADMIN
                         if ($_SESSION['role'] == "admin") {
-                            include '_chunks/dashboard/admin.php';
+                            include '_chunks/admin.php';
                         }
                         //PRACTICE or FACULTY
                         elseif ($_SESSION['role'] == "practice") {
-                            include '_chunks/dashboard/practice.php';
+                            include '_chunks/practice.php';
                         }
                         //SALES
                         elseif ($_SESSION['role'] == "sales") {
 
-                            include '_chunks/dashboard/sales.php';
+                            include '_chunks/sales.php';
                         }
                         //MARKETING
                         elseif ($_SESSION['role'] == "market") {
-                            include '_chunks/dashboard/market.php';
+                            include '_chunks/market.php';
                         }
                         // NOT LOGGED IN
                         else {
