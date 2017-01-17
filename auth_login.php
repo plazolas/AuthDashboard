@@ -14,7 +14,8 @@ if (ini_set('session.name', '_uall') === false) {
 session_start();
 
 $config = new Config();
-$dbh = new PDO("mysql:host={$config->server};dbname={$config->database}", $config->user, $myconfig->password);
+//echo "mysql:host={$config->server};dbname={$config->database} user: {$config->user} password: {$config->password}";
+$dbh = new PDO("mysql:host={$config->server};dbname={$config->database}", $config->user, $config->password);
 if ($dbh === false) {
     die("Unable to connect to database");
 }
@@ -22,7 +23,7 @@ if ($dbh === false) {
 if($config->server == 'localhost') {
     $env = 'dev';
 } else {
-    $env = 'live';    
+    $env = 'dev';    
 }
 
 function local_app_error($errno, $errstr, $errfile, $errline) {
@@ -70,7 +71,7 @@ $user_rememberme = ($user_rememberme == 'yes') ? 1 : 0;
 $query = $dbh->prepare("SELECT * FROM `user` WHERE email = ? AND password = ? ");
 $query->execute(array($user_email, $user_password));
 if (!$row = $query->fetch(\PDO::FETCH_ASSOC)) {
-    echo __FILE__." User not found in local table: ";exit;
+    echo __FILE__." User {$user_email} {$user_password} not found in local table: ";exit;
     header("Location: logout.php");
     exit();
 }
@@ -83,17 +84,17 @@ $login = $auth->login($user_email, $user_password, $user_rememberme);
 if ($login['error']) {
     $msg = $login['message'];
     $_SESSION['error'] = $msg;
-    log_error($msg);
+    echo $msg;
+    error_log($msg);exit;
     header("Location: logout.php");
     exit();
 } else {
     
-    $result = setcookie($config->cookie_name, $login['hash'], $login['expire'], $config->cookie_path, $config->cookie_domain, $config->cookie_secure, $config->cookie_http);
+    $result = setcookie($PHPAuthConfig->cookie_name, $login['hash'], $login['expire'], $PHPAuthConfig->cookie_path, $PHPAuthConfig->cookie_domain, $PHPAuthConfig->cookie_secure, $PHPAuthConfig->cookie_http);
     if ($result == false) {
         echo "<h1>COULD NOT SET COOKIE!! You must enable cookies on your browser for this site!</h1>";
         exit;
     }
-    session_start();
 
     $uid = $auth->getUID($user_email);
     $user_obj = new User();
