@@ -21,9 +21,9 @@ if ($dbh === false) {
 }
 
 if($config->server == 'localhost') {
-    $env = 'dev';
+    $env = 'dev-ops';
 } else {
-    $env = 'dev';    
+    $env = 'live';
 }
 
 function local_app_error($errno, $errstr, $errfile, $errline) {
