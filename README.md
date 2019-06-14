@@ -1,7 +1,6 @@
 # AuthDashboard
 Simple LAMP Responsive Dashboard for non-MVC Applications
 
-
 FEATURES
 
 * Simple MySQL CRUD Classes.
