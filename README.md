@@ -19,7 +19,7 @@ DEMO INCLUDES
 * Certification / Diplomas Manager.
 * Take a quiz for certification with automatic result chekings.
 
-ADDITIONAL INSTALATION NOTES
+ADDITIONAL INSTALATION NOTES:
 
 The certificates folder must be read write
 
